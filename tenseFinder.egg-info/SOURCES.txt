@@ -1,0 +1,14 @@
+LICENSE
+README.md
+setup.py
+TenseFinder/SentenceTenseModel.py
+TenseFinder/TenseModel.py
+TenseFinder/TenseParser.py
+TenseFinder/TenseSegmentModel.py
+TenseFinder/__init__.py
+tenseFinder.egg-info/PKG-INFO
+tenseFinder.egg-info/SOURCES.txt
+tenseFinder.egg-info/dependency_links.txt
+tenseFinder.egg-info/not-zip-safe
+tenseFinder.egg-info/requires.txt
+tenseFinder.egg-info/top_level.txt

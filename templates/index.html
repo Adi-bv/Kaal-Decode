@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAAL DECODE</title>
+    <!-- Link to Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.1/tesseract.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>KAAL DECODE</h1>
+        
+        <!-- Icons Section -->
+        <div class="icons">
+            <i id="start-voice" class="fas fa-microphone"></i> <!-- Microphone Icon -->
+            <i class="fas fa-upload" id="upload"></i> <!-- Upload Icon -->
+        </div>
+        
+        <!-- Tense Prediction Form -->
+        <form id="tenseForm">
+            <label for="paragraph" style="color: black;">Enter a sentence or a paragraph:</label><br>
+            <textarea id="paragraph" name="sentence" rows="4" cols="50"></textarea><br><br>
+            <button type="submit">Predict Tense</button>
+        </form>
+
+        <!-- Display the result -->
+        <div id="result"></div>
+
+        <!-- Hidden elements for camera and OCR functionality -->
+        <div style="display:none;">
+            <input type="file" id="file-input" accept="image/*">
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='javascript.js') }}"></script>
+    <script>
+        document.getElementById('tenseForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the traditional way
+
+            const paragraph = document.getElementById('paragraph').value;
+
+            // Send API request to Flask backend
+            fetch('/predict-paragraph', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    'paragraph': paragraph  // Pass form data to the API
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the tense results on the same page, with each sentence on a new line
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `<pre>${data.tenses}</pre>`;  // Use <pre> to preserve line breaks
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
+

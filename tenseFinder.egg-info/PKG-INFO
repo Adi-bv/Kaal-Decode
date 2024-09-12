@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: tenseFinder
+Version: 0.1
+Summary: simple English tense finder
+Home-page: https://github.com/AliKhalili/tensfinder
+Author: Ali Khalili
+Author-email: akyegane[at]gmail.com
+License: MIT
+License-File: LICENSE
+Requires-Dist: spacy
