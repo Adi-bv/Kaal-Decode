@@ -155,30 +155,6 @@ def predict():
     
     return jsonify({"tense": result})
 
-'''@app.route('/predict-paragraph', methods=['POST'])
-def predict_paragraph():
-    data = request.get_json()
-    paragraph = data.get('paragraph')
-    
-    # Convert emojis to text
-    paragraph = convert_emoji_to_text(paragraph)
-    
-    # Translate paragraph to English
-    translated = translator.translate(paragraph, dest='en')
-    paragraph = translated.text
-    
-    parser = TenseParser()
-    sentences = [sentence.strip() for sentence in paragraph.split('. ') if sentence.strip()]
-    
-    results = {}
-    
-    for sentence in sentences:
-        if sentence:
-            sentence = sentence if sentence.endswith('.') else sentence + '.'
-            tense = parser.parse(sentence)
-            results[sentence] = tense
-    
-    return jsonify({"tenses": results, "translated_paragraph": paragraph})'''
 @app.route('/predict-paragraph', methods=['POST'])
 def predict_paragraph():
     data = request.get_json()
