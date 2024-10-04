@@ -132,6 +132,7 @@ from flask import Flask, request, render_template, jsonify
 from TenseFinder.TenseParser import TenseParser
 from emoji import convert_emoji_to_text  # Import the emoji conversion function
 from googletrans import Translator  # Import the Translator from googletrans
+import os
 
 app = Flask(__name__)
 
@@ -211,7 +212,9 @@ def predict_paragraph():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Use the 'PORT' environment variable or default to 5000
+    app.run(host='0.0.0.0', port=port)
 
 
 
